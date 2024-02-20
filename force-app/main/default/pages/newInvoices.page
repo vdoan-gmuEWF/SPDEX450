@@ -1,0 +1,32 @@
+<apex:page standardController="Invoices__c" recordSetVar="Invoices" extensions="InvoicesController">
+    <apex:form>
+        <apex:pageBlock>
+            <apex:pageBlockButtons>
+                <apex:commandButton id="saveBtn" value="Save" action="{!save}" disabled="{!NOT(isBalanced)}"></apex:commandButton>
+                <apex:commandButton value="Cancel" action="{!cancel}"></apex:commandButton>
+            </apex:pageBlockButtons>
+            <apex:pageBlock title="Payment Summary">
+                <apex:outputPanel id="summary">
+                    <apex:pageBlockSection columns="3">
+                        <apex:pageBlockSectionItem>Expected Total Amount: {!oOpportunity.Amount}</apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem>Current Payments Total: {!totalInvoices}</apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem>Variance: {!invoiceRemainder}</apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+                </apex:outputPanel>
+            </apex:pageBlock>
+            <apex:pageBlockTable value="{!newInvoices}" var="invoice">
+                <apex:column value="{!invoice.Invoiced_Date__c}"></apex:column>
+                <apex:column value="{!invoice.Account__c}"></apex:column>
+                <apex:column value="{!invoice.Opportunity__c}"></apex:column>
+                <apex:column headerValue="Amount" >
+                    <apex:inputField value="{!invoice.Amount__c}">
+                        <apex:actionSupport event="onchange" action="{!recalcTotalInvoices}" rerender="summary,saveBtn"></apex:actionSupport>
+                    </apex:inputField>
+                </apex:column>
+                <apex:column headerValue="Due Date" >
+                    <apex:inputField value="{!invoice.Due_Date__c}"></apex:inputField>
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
