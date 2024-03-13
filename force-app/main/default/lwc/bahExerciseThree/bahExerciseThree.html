@@ -1,0 +1,25 @@
+<template>
+    <lightning-card title="BAH Exercise 3 & 4">
+        <template lwc:if={loading}>
+            <lightning-spinner alternative-text="Loading"></lightning-spinner>
+        </template>
+        <template lwc:if={showOne}>
+            <ol class="slds-list_ordered">
+                <template for:each={accounts} for:item="acc">
+                    <li key={acc.Id}><b>Account:</b> {acc.Name} <b>| Phone:</b> {acc.Phone} <b>| Annual Revenue: </b> <lightning-formatted-number value={acc.AnnualRevenue} format-style="currency" currency-code="USD"></lightning-formatted-number></li>
+                </template>
+            </ol>
+        </template>
+        <template lwc:elseif={showTwo}>
+            <ol class="slds-list_ordered">
+                <template for:each={opps} for:item="o">
+                    <li key={o.Id}><b>Account:</b> {o.AccountName} <b> | Opportunities:</b> {o.Name} <b>| Amount: </b> <lightning-formatted-number value={o.Amount} format-style="currency" currency-code="USD"></lightning-formatted-number> <b> | Close Date: </b> <lightning-formatted-date-time value={o.CloseDate}></lightning-formatted-date-time> <b> | State:</b> {o.StageName}</li>
+                </template>
+            </ol>
+        </template>
+        <lightning-button title="Show Accounts" label="Show Accounts" class="slds-m-left_x-small" onclick={toggleSectionOne}></lightning-button>
+        <template lwc:if={showOne}>
+            <lightning-button title="Show Related Opportunities" label="Show Related Opportunities" class="slds-m-left_x-small" onclick={toggleSectionTwo}></lightning-button>
+        </template>
+    </lightning-card>
+</template>

@@ -1,0 +1,12 @@
+<template>
+    <lightning-card title="Child Component">
+        <template lwc:if={childSaid}>
+            <p>My name is {childName}.</p>
+            <p>I am {age} years old.</p>
+        </template>
+        <template lwc:else>
+            <p>Child is quite.</p>
+        </template>
+        <lightning-input type="checkbox" label="Respond To Parent" value={childSaid} onchange={respondToParent}></lightning-input>
+    </lightning-card>
+</template>

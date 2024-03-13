@@ -1,0 +1,24 @@
+<template>
+    <lightning-card title="BAH Exercise 10">
+        <p>{selectedOppId}</p>
+        <template lwc:if={displayRecordForm}>
+            <lightning-record-form 
+            record-id={selectedOppId}
+            object-api-name="Opportunity"
+            mode="view"
+            layout-type="Full"
+            onsuccess={refreshRecords}>
+            </lightning-record-form>  
+        </template>
+        <template lwc:if={opps}>
+            <template for:each={opps} for:item="opp">
+                <div key={opp.Id}>
+                    <c-opp-card id={opp.Id} name={opp.Name} stage-name={opp.StageName} amount={opp.Amount} close-date={opp.CloseDate} onoppselected={handleOppEvent}></c-opp-card>
+                </div>  
+            </template>
+        </template>
+        <template lwc:else>
+            <p>No opp records to display...</p>
+        </template>       
+    </lightning-card>
+</template>

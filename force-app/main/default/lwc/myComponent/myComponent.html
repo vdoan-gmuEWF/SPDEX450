@@ -1,0 +1,15 @@
+<template>
+    <lightning-card>
+        <template lwc:if={showContacts}>
+            <template for:each={contacts} for:item="con" for:index="i">
+                <div key={con.Id}>
+                    <p>{incrementedIndex}. Name: {con.Name} | Title: {con.Title}</p>
+                </div>
+            </template>
+        </template>
+        <template lwc:else>
+            <p>No Contacts Displaying...</p>
+        </template>
+        <lightning-button title="Show Contacts" label="Show Contacts" onclick={toggleView}></lightning-button>
+    </lightning-card>
+</template>

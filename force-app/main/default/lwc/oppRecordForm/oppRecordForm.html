@@ -1,0 +1,11 @@
+<template>
+    <c-form-toggle mode={mode} onmodechange={handleModeChange}></c-form-toggle>
+    <lightning-record-form
+        object-api-name={objectApiName}
+        record-id={recordId}
+        mode={mode}
+        layout-type={layoutType}
+        columns="2"
+    >
+    </lightning-record-form>
+</template>

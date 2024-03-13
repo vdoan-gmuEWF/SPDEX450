@@ -116,10 +116,6 @@ private class InvoicesControllerTest {
         List<Invoices__c> lSavedInvoices = [ SELECT Id, Due_Date__c, Invoiced_Date__c FROM Invoices__c ];
         System.assertEquals( 1, lSavedInvoices.size(), 'Incorrect number of invoices created');
 
-        System.debug(lSavedInvoices[0].Id);
-        System.debug(lSavedInvoices[0].Due_Date__c);
-        System.debug(lSavedInvoices[0].Invoiced_Date__c);
-
         System.assertEquals( lSavedInvoices[0].Due_Date__c, Date.today() + 30, 'Incorrect due date');
         System.assertEquals( lSavedInvoices[0].Invoiced_Date__c, Date.today() - 30, 'Incorrect invoiced date');
     }

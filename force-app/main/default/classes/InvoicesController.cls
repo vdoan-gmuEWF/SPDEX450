@@ -40,7 +40,7 @@ public with sharing class InvoicesController {
         }
 
         System.debug('CloseDate');
-        System.debug(oOpportunity.CloseDate);
+        System.debug(oOpportunity.CloseDate);ion
         System.debug('termsAppliedDueDate');
         System.debug(termsAppliedDueDate);
         System.debug('invoicedDate');
