@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="Opportunity Info" icon-name="standard:opportunity">
+        <template lwc:if={opportunity.data}>
+            <p><b>Name: </b>{opportunity.data.fields.Name.value}</p>
+            <p><b>Type: </b>{opportunity.data.fields.Type.value}</p>
+            <p><b>Amount: </b><lightning-formatted-number value={opportunity.data.fields.Amount.value} format-style="currency" currency-code="USD"></lightning-formatted-number></p>
+            <p><b>Stage: </b>{opportunity.data.fields.StageName.value}</p>
+        </template>
+        <template lwc:elseif={opportunity.error}>
+            <p>Error retrieving opportunity record...</p>
+        </template>
+        <template lwc:else>
+            <p>No opportunity record displaying...</p>
+        </template>
+    </lightning-card>
+</template>

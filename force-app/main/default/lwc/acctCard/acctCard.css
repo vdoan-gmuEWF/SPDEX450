@@ -1,0 +1,5 @@
+li::marker {
+    color: #0176d3; /* Change marker color */
+    font-weight: bold; /* Make marker text bold */
+    font-size: 1rem;
+}

@@ -1,0 +1,12 @@
+<template>
+    <lightning-card title="Account List" icon-name="standard:account"> 
+        <p>{selectedAcctName} {selectedAcctId}</p>
+        <ol class="slds-list_ordered">
+            <template for:each={accts} for:item="a">
+                <div key={a.Id}>
+                    <c-acct-card id={a.Id} name={a.Name} phone={a.Phone} annual-revenue={a.AnnualRevenue} onacctselected={handleAcctEvent}></c-acct-card>
+                </div>
+            </template>
+        </ol>
+    </lightning-card>
+</template>

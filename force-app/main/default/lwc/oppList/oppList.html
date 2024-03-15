@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Related Opportunities Info" icon-name="standard:opportunity">
+        <template lwc:if={display}>
+            <template for:each={opportunities} for:item="rec">
+                <div key={rec.fields.Id.value}>
+                    <c-opp-card id={rec.fields.Id.value} name={rec.fields.Name.value} stage-name={rec.fields.StageName.value} amount={rec.fields.Amount.value} close-date={rec.fields.CloseDate.value} onoppselected={handleOppEvent}></c-opp-card>
+                </div>
+            </template>     
+        </template>
+        <template lwc:else>
+            <p>No related opp record displaying...</p>
+        </template>
+    </lightning-card>
+</template>

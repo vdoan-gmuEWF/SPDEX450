@@ -1,15 +1,25 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, wire } from 'lwc';
 import getRelatedOpportunityList from '@salesforce/apex/OpportunityController.getRelatedOpportunityList';
+import { refreshApex } from '@salesforce/apex';
 
 export default class RelatedOppsComponent extends LightningElement {
     @api recordId;
     selectedOppId;
     selectedOppName;
     opps = [];
+    response;
     displayRecordForm = false;
-    connectedCallback() {
-        this.getRealatedOpps();
+
+    @wire(getRelatedOpportunityList, {accountId: '$recordId'})
+    wiredOpp(oRet){
+        this.response = oRet;
+        this.opps = (oRet.data) ? oRet.data : [];
+        if (oRet.error) console.log("Error");
     }
+
+    // connectedCallback() {
+    //    this.getRealatedOpps();
+    // }
 
     handleOppEvent(event) {
         const tempId = event.detail.id.split("-")[0] ?? event.detail.id;
@@ -20,16 +30,17 @@ export default class RelatedOppsComponent extends LightningElement {
         } else this.displayRecordForm = false;
     }
 
-    getRealatedOpps() {
-        getRelatedOpportunityList({accountId: this.recordId})
-            .then((data) => {
-                this.opps = data;
-            })
-            .catch((error) => {console.log(error);})
-            .finally(() => {console.log("Done!");})
-    }
+    // getRelatedOpps() {
+    //     getRelatedOpportunityList({accountId: this.recordId})
+    //         .then((data) => {
+    //             this.opps = data;
+    //         })
+    //         .catch((error) => {console.log(error);})
+    //         .finally(() => {console.log("Done!");})
+    // }
 
     refreshRecords() {
-        this.getRealatedOpps();
+        refreshApex(this.response);
+        //this.getRealatedOpps();
     }
 }
